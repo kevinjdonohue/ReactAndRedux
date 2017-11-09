@@ -120,10 +120,23 @@ WHERE/WHEN TO USE
 | Lifecycle Methods             |                     |
 | Child functions (performance) |                     |
 
-### Alternative Methods for creating components
+### Container Component vs Presentation Components
 
-1. Object.create
-1. Mixins
-1. Parasitic Components
-1. StampIt
+WHERE/WHEN TO USE
+
+| Container Component         | Presentation Component              |
+| --------------------------- | ----------------------------------- |
+| Little to no markup         |  Nearly all markup                  |
+| Pass data and actions down  |  Receive data and actions via props |
+| Knows about Redux           |  Doesn't know about Redux           |
+| Often Stateful              |  Typically functional components    |
+
+Alternative naming for these components:
+
+* Container vs Presentational
+* Stateful vs Stateless
+* Smart vs Dumb
+* Controller View vs View
+
+Prefer Container vs Presentational
 
