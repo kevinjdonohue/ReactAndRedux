@@ -197,9 +197,9 @@ Redux:
 | React components subscribe to stores  | Container components utilize connect (lib)  |
 | State is mutated                      | State is immutable                          |
 
-### Redux Flow
+## Actions, Stores & Reducers
 
-#### Action
+### Actions
 
 * Describes user intent.
 * Must have a type.
@@ -212,22 +212,104 @@ Action Example:
 
 ```
 
-### Reducer
+### Action Creators
 
-* A function that returns new state
+* Created by convenience functions called Action Creators.
+* Often have the same name as the action they are creating.
 
-Reducer Example:
+
+
+Action Creator Example:
 
 ```js
 
-function appReducer(state = defaultState, action) {
+rateCourse(rating) {
+  return { type: RATE_COURSE, rating: rating }
+}
+
+```
+
+### Stores
+
+* Created at your application's entry point.
+* Single source of truth
+* Immutable
+
+### Store API
+
+* store.dispatch(action)
+* store.subscribe(listener)
+* store.getState()
+* store.replaceReducer(nextReducer)
+
+### Immutability
+
+* To change state, return a new object
+
+#### Creating a copy of an existing object in ES6
+
+* Object.assign(target, ...sources)
+
+Copy Example:
+
+```js
+
+Object.assign({}, state, {role: 'admin'});
+
+```
+
+#### Why Immutability
+
+* Clarity - answers "Who changed the state?"
+* Performance - reference comparison between state - instead of comparing individual pieces of data
+* Awesome sauce - time travel debugging, play interactions back
+
+#### Handling Immutability in ES6
+
+* Object.assign
+* Spread operator
+
+In addition, you could use the following to handle things further:
+
+* ~~react-addons-update~~ - immutability-helper
+* Immutable.js
+
+#### Enforcing Immutability
+
+Since JavaScript does not contain immutable data structures, there are 3 approaches:
+
+1. Trust your team members
+1. redux-immutable-state-invariant - for Dev only
+1. Immutable.js - immutable data structures
+
+### Reducers
+
+(def) A reducer is a function that takes in state and an action and returns new state.
+
+* Must be "pure" functions - no side effects.
+* Forbidden:
+  * Mutate arguments
+  * Perform side-effects
+  * Call non-pure functions
+* Each is responsible for managing a "slice" of the state.
+
+Everytime some change occurs, every reducer is called.
+
+```js
+
+function myReducer(state, action) {
   switch(action.type) {
-    case RATE_COURSE:
-      //return new state
+    case 'INCREMENT_COUNTER':
+      return (Object.assign(
+          {},
+          state,
+          {counter: state.counter + 1}
+        )
+      );
   }
 }
 
 ```
 
-NOTE:  The React-Redux library connects the Store with the React components - which allows the components to react to the state change(s).
+## Connecting React to Redux
 
