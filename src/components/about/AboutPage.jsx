@@ -1,3 +1,5 @@
+/* eslint-disable react/prefer-stateless-function */
+
 import React from 'react';
 
 class AboutPage extends React.Component {
