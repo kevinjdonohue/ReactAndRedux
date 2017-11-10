@@ -140,3 +140,94 @@ Alternative naming for these components:
 
 Prefer Container vs Presentational
 
+## Redux
+
+### Do I Need It
+
+It's often needed when you have:
+
+* Complex data flows
+* Inter-component communication
+* Non-hierarchical data
+* Many actions
+* Same data used in multiple places
+
+### 3 Core Principles
+
+1. One immutable store
+1. Actions trigger changes
+1. Reducers update state
+
+### Similarities with Flux
+
+* Unidirectional Flow
+* Actions
+* Stores
+
+### Differences with Flux
+
+* Reducers
+* Containers
+* Immutability
+
+Also, Flux has multiple stores while Redux uses the concept of a single store.
+
+### Conceptual Differences
+
+Flux:
+
+* Action
+* Dispatcher
+* Store
+* React
+
+Redux:
+
+* Action
+* Store
+* React
+* Reducers
+
+| Flux                                  | Redux                                       |
+| ------------------------------------- | ------------------------------------------- |
+| Stores contain state and change logic | Store and change logic are separate         |
+| Multiple stores                       | One store                                   |
+| Flat and disconnected stores          | Single store with hierarchical reducers     |
+| Singleton dispatcher                  | No dispatcher                               |
+| React components subscribe to stores  | Container components utilize connect (lib)  |
+| State is mutated                      | State is immutable                          |
+
+### Redux Flow
+
+#### Action
+
+* Describes user intent.
+* Must have a type.
+
+Action Example:
+
+```js
+
+{ type: RATE_COURSE, rating: 5 }
+
+```
+
+### Reducer
+
+* A function that returns new state
+
+Reducer Example:
+
+```js
+
+function appReducer(state = defaultState, action) {
+  switch(action.type) {
+    case RATE_COURSE:
+      //return new state
+  }
+}
+
+```
+
+NOTE:  The React-Redux library connects the Store with the React components - which allows the components to react to the state change(s).
+
