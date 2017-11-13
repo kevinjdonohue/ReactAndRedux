@@ -471,7 +471,7 @@ Pros:
 
 Cons:
 
-1. 
+1. ?
 
 ### A Chat With Redux
 
@@ -487,3 +487,6 @@ Here is a typical flow between the items:
 | Store       | Thanks for update the state Reducer.  I'll make sure that all connected components are aware |
 | React-Redux | Thanks for the new data Store.  I'll now intelligently determine if I should tell React about this change so that it only has to bother with updating the UI when necessary |
 | React       | New data has been passed down via props from the Store.  I'll update the UI to reflect this |
+
+## Redux Flow
+
