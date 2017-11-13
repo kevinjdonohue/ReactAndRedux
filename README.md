@@ -328,10 +328,10 @@ function myReducer(state, action) {
 
 react-redux library connects your Store with React (components)
 
-2 core items
+2 core items:
 
-* Provider Component
-* Connect Function
+1. Provider Component
+1. Connect Function
 
 ### Provider Component
 
@@ -349,3 +349,141 @@ Provider Component Exmaple:
 </Provider>
 
 ```
+
+### Connect Function
+
+* Creates container components
+* Wraps components so it is connected to the Redux store
+* Declare which parts of the store we'd like attached to our components as props
+* Declare which actions we want to expose as well?
+
+```js
+
+function mapStateToProps(state, ownProps) {
+  return {appState: state.authorReducer};
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AuthorPage);
+
+```
+
+### mapStateToProps Function
+
+* Answers the question - What state should I expose as props?
+
+mapStateToProps Example:
+
+```js
+
+function mapStateToProps(state) {
+  return {
+    appState: state
+  };
+}
+
+```
+
+Memoization?
+
+### mapDispatchToProps Function
+
+* Answers the question - What actiosn do I want on props?
+
+3 ways to handle mapDispatchToProps:
+
+1. Ignore it.  Use Dispatch directly
+1. Manually wrap (action creator function)
+1. Use bindActionCreators
+
+Use Dispatch Directly:
+
+```js
+
+this.props.dispatch(loadCourses());
+
+```
+
+Pros:
+
+1. ? Simple ?
+
+Cons:
+
+1. Boilerplate
+1. Redux concerns in child components (children need to know about Redux concepts)
+
+Manually Wrap Action Creator Function:
+
+```js
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadCourses: () => {
+      dispatch(loadCourses());
+    },
+    createCourse: () => {
+      dispatch(createCourse());
+    },
+    updateCourse: () => {
+      dispatch(updateCourse());
+    }
+  };
+}
+
+// when used in a component:
+
+this.props.loadCourses()
+
+```
+
+Pros:
+
+1. Good option when you are getting started with Redux
+1. Obvious what is being handled; explicit
+
+Cons:
+
+1. Redundant / Boilerplate code
+
+Use bindActionCreators Function:
+
+```js
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+    }
+  };
+}
+
+// when used in a component:
+
+this.props.actions.loadCourses()
+
+```
+
+Pros:
+
+1. Clean(er) - automatically wraps actions in a dispatch call
+
+Cons:
+
+1. 
+
+### A Chat With Redux
+
+In order to gain an understanding of all of the things in play between React and Redux consider each of the items as an actor.
+
+Here is a typical flow between the items:
+
+| Item        | Conversation                                                                |
+| ------------ ---------------------------------------------------------------------------- |
+| React       | Hey CourseAction, someone clicked this "Save Course" button                 |
+| Action      | Thanks React!  I will dispatch an Action so Reducers that care can update state |
+| Reducer     | Ah, thanks Action.  I see you passed me the current State and the Action to perform.  I'll make a new copy of the state and return it |
+| Store       | Thanks for update the state Reducer.  I'll make sure that all connected components are aware |
+| React-Redux | Thanks for the new data Store.  I'll now intelligently determine if I should tell React about this change so that it only has to bother with updating the UI when necessary |
+| React       | New data has been passed down via props from the Store.  I'll update the UI to reflect this |
