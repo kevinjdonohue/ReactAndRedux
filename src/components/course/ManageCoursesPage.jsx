@@ -20,5 +20,9 @@
 
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
+
+    this.state = {
+      course: { title: '' },
+    };    
   
 */
