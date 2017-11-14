@@ -25,10 +25,11 @@ class CoursesPage extends React.Component {
   }
 
   onClickSave() {
-    this.props.dispatch(courseActions.createCourse(this.state.course));
+    this.props.createCourse(this.state.course);
   }
 
   render() {
+    // debugger;
     return (
       <div>
         <h1>Courses</h1>
@@ -43,14 +44,21 @@ class CoursesPage extends React.Component {
 
 /* eslint-disable react/forbid-prop-types */
 CoursesPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   courses: PropTypes.array.isRequired,
+  createCourse: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
+  // debugger;
   return {
     courses: state.courses,
   };
 }
 
-export default connect(mapStateToProps)(CoursesPage);
+function mapDispatchToProps(dispatch) {
+  return {
+    createCourse: course => dispatch(courseActions.createCourse(course)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
