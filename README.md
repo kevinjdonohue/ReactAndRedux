@@ -488,5 +488,70 @@ Here is a typical flow between the items:
 | React-Redux | Thanks for the new data Store.  I'll now intelligently determine if I should tell React about this change so that it only has to bother with updating the UI when necessary |
 | React       | New data has been passed down via props from the Store.  I'll update the UI to reflect this |
 
-## Redux Flow
+## Async in Redux
 
+### Mock APIs
+
+Why a Mock API?
+
+Pros:
+
+* Start before API exists
+* Independence from others (teams, developers, etc.)
+* Ultra-fast; rapid development
+* Test slowness; test performance (set timeout)
+* Aids testing; fast and reliable, deterministic data, etc.
+* Point to the real API later; change config
+
+### Async
+
+Comparison of async handling:
+
+| Flux                  | Redux               |
+| ----------------------  --------------------|
+| Handled in action     | ?                   |
+
+### Async in Redux - Libraries
+
+* redux-thunk
+* redux-promise
+* redux-saga
+
+### redux-thunk
+
+* Written by Dan Abramov (Redux)
+* Return functions from action creators instead of objects
+
+### redux-promise
+
+* Newer library
+* Uses Flux standard actions and promises
+* _Very new_ so caution on this one -- least popular at this time
+
+### redux-saga
+
+* Uses ES6 generators
+* Rich, domain-specific language
+* Powerful
+
+### redux-thunk vs. redux-saga
+
+| Thunk                   | Sagas                 |
+| ----------------------- | ----------------------|
+| Functions               | Generators            |
+| Clunky to test          | Easy to test          |
+| Easy to learn           | Hard to learn         |
+
+### Thunk
+
+```js
+
+export function deleteAuthor(authorId) {
+  return dispatch => {
+    return AuthorApi.deleteAuthor(authorId).then(() => {
+      dispatch(deletedAuthor(authorId));
+    }).catch(handleError);
+  };
+}
+
+```
