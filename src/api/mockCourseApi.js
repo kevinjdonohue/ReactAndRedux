@@ -62,6 +62,7 @@ class CourseApi {
     });
   }
 
+  /* eslint-disable prefer-promise-reject-errors, no-param-reassign */
   static saveCourse(course) {
     course = Object.assign({}, course); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
@@ -89,6 +90,7 @@ class CourseApi {
     });
   }
 
+  /* eslint-disable no-unused-expressions, array-callback-return */
   static deleteCourse(courseId) {
     return new Promise((resolve) => {
       setTimeout(() => {

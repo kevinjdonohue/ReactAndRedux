@@ -33,6 +33,7 @@ class AuthorApi {
     });
   }
 
+  /* eslint-disable prefer-promise-reject-errors, no-param-reassign */
   static saveAuthor(author) {
     author = Object.assign({}, author); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
@@ -63,6 +64,7 @@ class AuthorApi {
     });
   }
 
+  /* eslint-disable no-unused-expressions, array-callback-return */
   static deleteAuthor(authorId) {
     return new Promise((resolve) => {
       setTimeout(() => {

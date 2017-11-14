@@ -7,44 +7,19 @@ import * as courseActions from '../../actions/courseActions';
 
 class CoursesPage extends React.Component {
   // (1) Constructor:  initialize state, bind functions
-  /* eslint-disable react/sort-comp */
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      course: { title: '' },
-    };
-
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onClickSave = this.onClickSave.bind(this);
-  }
 
   // (2) Child Functions:
-  onTitleChange(event) {
-    const { course } = this.state;
-    course.title = event.target.value;
-    this.setState({ course });
-  }
-
-  onClickSave() {
-    this.props.actions.createCourse(this.state.course);
-  }
-
   static courseRow(course, index) {
     return <div key={index}>{course.title}</div>;
   }
 
   // (3) Render Method:
-  // NOTE:  This markup should be moved into a separate, presentation component; for demo purposes
   render() {
     // debugger;
     return (
       <div>
         <h1>Courses</h1>
         {this.props.courses.map(CoursesPage.courseRow)}
-        <h2>Add Course</h2>
-        <input type="text" value={this.state.course.title} onChange={this.onTitleChange} />
-        <input type="submit" value="Save" onClick={this.onClickSave} />
       </div>
     );
   }
@@ -54,7 +29,6 @@ class CoursesPage extends React.Component {
 /* eslint-disable react/forbid-prop-types */
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
 };
 
 // (5) Redux Related Functions:
