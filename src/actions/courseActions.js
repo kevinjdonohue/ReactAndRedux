@@ -1,5 +1,7 @@
+import * as types from './actionTypes';
+
 /* eslint-disable import/prefer-default-export */
 export function createCourse(course) {
   // debugger;
-  return { type: 'CREATE_COURSE', course };
+  return { type: types.CREATE_COURSE, course };
 }
