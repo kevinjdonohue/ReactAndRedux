@@ -15,7 +15,6 @@ class CoursesPage extends React.Component {
 
   // (3) Render Method:
   render() {
-    // debugger;
     return (
       <div>
         <h1>Courses</h1>
@@ -34,7 +33,6 @@ CoursesPage.propTypes = {
 // (5) Redux Related Functions:
 // connect, bindActionCreators, mapStateToProps, mapDispatchToProps, etc.
 function mapStateToProps(state) {
-  // debugger;
   return {
     courses: state.courses,
   };
