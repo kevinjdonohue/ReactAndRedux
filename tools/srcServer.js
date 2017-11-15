@@ -25,6 +25,6 @@ app.listen(port, (err) => {
   if (err) {
     console.log(err);
   } else {
-    open(`http://localhost:${port}`, 'google chrome');
+    open(`http://localhost:${port}`, 'firefox');
   }
 });
