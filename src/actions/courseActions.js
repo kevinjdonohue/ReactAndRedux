@@ -10,12 +10,13 @@ export function loadCoursesSuccess(courses) {
 
 // thunk
 export function loadCourses() {
-  return function (dispatch) {
-    return courseApi.getAllCourses().then((courses) => {
-      dispatch(loadCoursesSuccess(courses));
-    }).catch((error) => {
-      // throw (error);
-      console.log(error);
-    });
+  return function dispatchLoadCourses(dispatch) {
+    return courseApi.getAllCourses()
+      .then((courses) => {
+        dispatch(loadCoursesSuccess(courses));
+      }).catch((error) => {
+        /* eslint-disable no-console */
+        console.log(error);
+      });
   };
 }
