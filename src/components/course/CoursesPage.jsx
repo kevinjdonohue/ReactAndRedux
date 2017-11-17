@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
+import CourseList from './CourseList';
 
 // 5 Parts of a Container Component in React & Redux -- see below
 
@@ -15,10 +16,12 @@ class CoursesPage extends React.Component {
 
   // (3) Render Method:
   render() {
+    const {courses} = this.props;
+
     return (
       <div>
         <h1>Courses</h1>
-        {this.props.courses.map(CoursesPage.courseRow)}
+        <CourseList courses={courses}/>
       </div>
     );
   }
