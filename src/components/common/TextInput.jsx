@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react';
 
-const TextInput = ({ name, label, onChange, placeholder, value, error }) => {
+const TextInput = ({
+  name, label, onChange, placeholder, value, error,
+}) => {
   let wrapperClass = 'form-group';
 
   if (error && error.length > 0) {
     wrapperClass += ' has-error';
   }
 
+  /* eslint-disable jsx-a11y/label-has-for */
   return (
     <div className={wrapperClass}>
       <label htmlFor={name}>{label}</label>
