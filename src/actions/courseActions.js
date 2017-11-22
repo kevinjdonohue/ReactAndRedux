@@ -1,5 +1,5 @@
+import CourseApi from '../api/mockCourseApi';
 import * as types from './actionTypes';
-import courseApi from '../api/mockCourseApi';
 
 /* eslint-disable import/prefer-default-export */
 export function loadCoursesSuccess(courses) {
@@ -10,13 +10,12 @@ export function loadCoursesSuccess(courses) {
 
 // thunk
 export function loadCourses() {
-  return function dispatchLoadCourses(dispatch) {
-    return courseApi.getAllCourses()
+  return dispatch =>
+    CourseApi.getAllCourses()
       .then((courses) => {
         dispatch(loadCoursesSuccess(courses));
-      }).catch((error) => {
-        /* eslint-disable no-console */
-        console.log(error);
+      })
+      .catch((error) => {
+        throw (error);
       });
-  };
 }
