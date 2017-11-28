@@ -555,5 +555,3 @@ export function deleteAuthor(authorId) {
 }
 
 ```
-
-### Saga
