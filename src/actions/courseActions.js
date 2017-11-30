@@ -6,11 +6,11 @@ export function loadCoursesSuccess(courses) {
   return { type: types.LOAD_COURSES_SUCCESS, courses };
 }
 
-export function updateCourseSuccess(course) {
+export function createCourseSuccess(course) {
   return { type: types.CREATE_COURSE_SUCCESS, course };
 }
 
-export function createCourseSuccess(course) {
+export function updateCourseSuccess(course) {
   return { type: types.UPDATE_COURSE_SUCCESS, course };
 }
 
@@ -28,6 +28,7 @@ export function loadCourses() {
       });
 }
 
+// thunk
 export function upsertCourse(course) {
   return dispatch =>
     CourseApi.saveCourse(course)
