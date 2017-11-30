@@ -15,15 +15,21 @@ class ManageCoursePage extends React.Component {
     };
 
     this.updateCourseState = this.updateCourseState.bind(this);
+    this.upsertCourse = this.upsertCourse.bind(this);
   }
 
   updateCourseState(event) {
     const field = event.target.name;
     const { course } = this.state;
-
     course[field] = event.target.value;
 
     return this.setState({ course });
+  }
+
+  upsertCourse(event) {
+    event.preventDefault();
+    this.props.actions.upsertCourse(this.state.course);
+    this.context.router.push('/courses');
   }
 
   render() {
@@ -32,7 +38,7 @@ class ManageCoursePage extends React.Component {
         allAuthors={this.props.authors}
         course={this.state.course}
         // errors={this.state.errors}
-        onSave={() => {}}
+        onSave={this.upsertCourse}
         onChange={this.updateCourseState}
       />
     );
@@ -43,10 +49,34 @@ class ManageCoursePage extends React.Component {
 ManageCoursePage.propTypes = {
   course: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
-  const course = {
+// contextTypes == global variable that library authors use
+// typically we should shy away from using context, but in this case
+// it's here to help us avoid some boilerplate code
+
+// another way to use the react-router
+ManageCoursePage.contextTypes = {
+  router: PropTypes.object.isRequired,
+};
+
+function getCourseById(courses, id) {
+  const course = courses.filter(c => c.id === id);
+
+  if (course.length) {
+    return course[0];
+  }
+
+  return null;
+}
+
+function mapStateToProps(state, ownProps) {
+  // from the path '/course/:id
+  const courseId = ownProps.params.id;
+  console.log('courseId: ' + courseId);
+
+  let course = {
     id: '',
     watchHref: '',
     title: '',
@@ -54,6 +84,10 @@ function mapStateToProps(state) {
     length: '',
     category: '',
   };
+
+  if (courseId) {
+    course = getCourseById(state.courses, courseId);
+  }
 
   const authorsFormattedForDropdown = state.authors.map(author => ({
     value: author.id,
