@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
 
-/* eslint-disable react/prefer-stateless-function */
 class ManageCoursePage extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -21,7 +20,9 @@ class ManageCoursePage extends React.Component {
   // react lifecycle function
   // runs when props have changed (and even sometimes when they haven't)
   componentWillReceiveProps(nextProps) {
-    if (this.props.course.id !== nextProps.course.id) {
+    const courseIdChanged = this.props.course.id !== nextProps.course.id;
+
+    if (courseIdChanged) {
       // necessary to populate form when existing course is loaded directly (hit the URL directly)
       this.setState({
         course: Object.assign({}, nextProps.course),
@@ -74,8 +75,9 @@ ManageCoursePage.contextTypes = {
 
 function getCourseById(courses, id) {
   const course = courses.filter(c => c.id === id);
+  const courseWasFound = course.length;
 
-  if (course.length) {
+  if (courseWasFound) {
     return course[0];
   }
 
@@ -95,7 +97,9 @@ function mapStateToProps(state, ownProps) {
     category: '',
   };
 
-  if (courseId && state.courses.length > 0) {
+  const stateContainsCourses = state.courses.length > 0;
+
+  if (courseId && stateContainsCourses) {
     course = getCourseById(state.courses, courseId);
   }
 
