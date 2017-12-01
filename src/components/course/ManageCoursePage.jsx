@@ -18,6 +18,17 @@ class ManageCoursePage extends React.Component {
     this.upsertCourse = this.upsertCourse.bind(this);
   }
 
+  // react lifecycle function
+  // runs when props have changed (and even sometimes when they haven't)
+  componentWillReceiveProps(nextProps) {
+    if (this.props.course.id !== nextProps.course.id) {
+      // necessary to populate form when existing course is loaded directly (hit the URL directly)
+      this.setState({
+        course: Object.assign({}, nextProps.course),
+      });
+    }
+  }
+
   updateCourseState(event) {
     const field = event.target.name;
     const { course } = this.state;
@@ -74,7 +85,6 @@ function getCourseById(courses, id) {
 function mapStateToProps(state, ownProps) {
   // from the path '/course/:id
   const courseId = ownProps.params.id;
-  console.log('courseId: ' + courseId);
 
   let course = {
     id: '',
@@ -85,7 +95,7 @@ function mapStateToProps(state, ownProps) {
     category: '',
   };
 
-  if (courseId) {
+  if (courseId && state.courses.length > 0) {
     course = getCourseById(state.courses, courseId);
   }
 
