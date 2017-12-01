@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+/* eslint-disable arrow-body-style */
 const CourseRowList = ({ course }) => {
   return (
     <tr>
@@ -10,7 +11,9 @@ const CourseRowList = ({ course }) => {
         </a>
       </td>
       <td>
-        <Link to={`/course/${course.id}`} href="{course.id}">{course.title}</Link>
+        <Link to={`/course/${course.id}`} href="{course.id}">
+          {course.title}
+        </Link>
       </td>
       <td>{course.authorId}</td>
       <td>{course.category}</td>

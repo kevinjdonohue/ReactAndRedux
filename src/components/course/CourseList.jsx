@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import CourseListRow from './CourseListRow';
 
+/* eslint-disable arrow-body-style */
 const CourseList = ({ courses }) => {
   return (
     <table>
