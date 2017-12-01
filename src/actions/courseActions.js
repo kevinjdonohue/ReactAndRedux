@@ -1,5 +1,6 @@
 import CourseApi from '../api/mockCourseApi';
 import * as types from './actionTypes';
+import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
 /* eslint-disable import/prefer-default-export */
 export function loadCoursesSuccess(courses) {
@@ -18,26 +19,33 @@ export function updateCourseSuccess(course) {
 
 // thunk
 export function loadCourses() {
-  return dispatch =>
-    CourseApi.getAllCourses()
+  return function d(dispatch) {
+    dispatch(beginAjaxCall());
+
+    return CourseApi.getAllCourses()
       .then((courses) => {
         dispatch(loadCoursesSuccess(courses));
       })
       .catch((error) => {
         throw error;
       });
+  };
 }
 
 // thunk
 export function upsertCourse(course) {
-  return dispatch =>
-    CourseApi.saveCourse(course)
+  return function d(dispatch) {
+    dispatch(beginAjaxCall());
+
+    return CourseApi.saveCourse(course)
       .then((savedCourse) => {
         course.id
           ? dispatch(updateCourseSuccess(savedCourse))
           : dispatch(createCourseSuccess(savedCourse));
       })
       .catch((error) => {
+        dispatch(ajaxCallError(error));
         throw error;
       });
+  };
 }
