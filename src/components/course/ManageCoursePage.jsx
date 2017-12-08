@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import toastr from 'toastr';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
+import { authorsFormattedForDropdown } from '../../selectors/authorSelectors';
 
 class ManageCoursePage extends React.Component {
   constructor(props, context) {
@@ -139,14 +140,9 @@ function mapStateToProps(state, ownProps) {
     course = getCourseById(state.courses, courseId);
   }
 
-  const authorsFormattedForDropdown = state.authors.map(author => ({
-    value: author.id,
-    text: `${author.firstName} ${author.lastName}`,
-  }));
-
   return {
     course,
-    authors: authorsFormattedForDropdown,
+    authors: authorsFormattedForDropdown(state.authors),
   };
 }
 
@@ -156,5 +152,8 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+// NOTE:  Instead of disabling the eslint rule - import/no-named-as-default rule
+// we've exported the non-wrapped component that we're using just for testing
+// as a "testable"
 export { ManageCoursePage as TestableManageCoursePage };
 export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
