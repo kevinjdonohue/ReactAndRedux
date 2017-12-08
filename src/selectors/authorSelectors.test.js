@@ -1,7 +1,7 @@
 import expect from 'expect';
 import { authorsFormattedForDropdown } from './authorSelectors';
 
-describe('authorSelectors', () => {
+describe('Author Selectors', () => {
   describe('authorsFormattedForDropdown', () => {
     it('should return author data formatted for use in a dropdown', () => {
       // arrange
