@@ -5,7 +5,7 @@ import Course from './Course';
 describe('Course', () => {
   it('should stub doSomething', () => {
     // arrange
-    const stub = this.stub(Course, 'doSomething').callsFake(() => 'fakeDoSomething');
+    const stub = sinon.stub(Course, 'doSomething').callsFake(() => 'fakeDoSomething');
 
     // act
     const result = Course.doSomethingElse();
