@@ -25,14 +25,11 @@ describe('Course Reducer', () => {
       { id: 'B', title: 'B' },
       { id: 'C', title: 'C' },
     ];
-
     const updatedCourse = {
       id: 'B',
       title: 'New Title',
     };
-
     const action = actions.updateCourseSuccess(updatedCourse);
-
     const expectedState = [
       { id: 'A', title: 'A' },
       { id: 'C', title: 'C' },

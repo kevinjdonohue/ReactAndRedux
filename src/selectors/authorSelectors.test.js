@@ -12,7 +12,6 @@ describe('Author Selectors', () => {
           lastName: 'House',
         },
       ];
-
       const expectedFormattedAuthors = [
         {
           value: 'cory-house',

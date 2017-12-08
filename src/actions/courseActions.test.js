@@ -1,6 +1,6 @@
 import expect from 'expect';
 import thunk from 'redux-thunk';
-import nock from 'nock';
+// import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
 import * as courseActions from './courseActions';
 import * as types from './actionTypes';
@@ -13,7 +13,6 @@ describe('CourseActions', () => {
         id: 'clean-code',
         title: 'Clean Code',
       };
-
       const expectedAction = {
         type: types.CREATE_COURSE_SUCCESS,
         course,
