@@ -12,7 +12,7 @@ class ManageCoursePage extends React.Component {
     this.state = {
       course: Object.assign({}, this.props.course),
       saving: false,
-      // errors: {},
+      errors: {},
     };
 
     this.updateCourseState = this.updateCourseState.bind(this);
@@ -42,13 +42,34 @@ class ManageCoursePage extends React.Component {
 
   redirect() {
     this.setState({ saving: false });
+
     toastr.success('Course saved', 'PluralSight Admin', { timeOut: 3000 });
     this.context.router.push('/courses');
   }
 
+  courseFormIsValid() {
+    let formIsValid = true;
+    const errors = {};
+
+    if (this.state.course.title.length < 5) {
+      errors.title = 'Title must be at least 5 characters.';
+      formIsValid = false;
+    }
+
+    this.setState({ errors });
+
+    return formIsValid;
+  }
+
   upsertCourse(event) {
     event.preventDefault();
+
+    if (this.courseFormIsValid() === false) {
+      return;
+    }
+
     this.setState({ saving: true });
+
     this.props.actions
       .upsertCourse(this.state.course)
       .then(() => this.redirect())
@@ -63,7 +84,7 @@ class ManageCoursePage extends React.Component {
       <CourseForm
         allAuthors={this.props.authors}
         course={this.state.course}
-        // errors={this.state.errors}
+        errors={this.state.errors}
         onSave={this.upsertCourse}
         onChange={this.updateCourseState}
         saving={this.state.saving}
@@ -135,4 +156,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+export { ManageCoursePage as TestableManageCoursePage };
 export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
