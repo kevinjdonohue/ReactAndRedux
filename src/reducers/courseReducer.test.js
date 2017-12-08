@@ -8,15 +8,14 @@ describe('Course Reducer', () => {
     const initialState = [{ title: 'A' }, { title: 'B' }];
     const newCourse = { title: 'C' };
     const action = actions.createCourseSuccess(newCourse);
+    const expectedState = [...initialState];
+    expectedState.push(newCourse);
 
     // act
-    const newState = courseReducer(initialState, action);
+    const actualState = courseReducer(initialState, action);
 
     // assert
-    expect(newState.length).toEqual(3);
-    expect(newState[0].title).toEqual('A');
-    expect(newState[1].title).toEqual('B');
-    expect(newState[2].title).toEqual('C');
+    expect(actualState).toEqual(expectedState);
   });
 
   it('should update course when passed UPDATE_COURSE_SUCCESS', () => {
@@ -34,17 +33,16 @@ describe('Course Reducer', () => {
 
     const action = actions.updateCourseSuccess(updatedCourse);
 
+    const expectedState = [
+      { id: 'A', title: 'A' },
+      { id: 'C', title: 'C' },
+      { id: 'B', title: 'New Title' },
+    ];
+
     // act
-    const newState = courseReducer(initialState, action);
+    const actualState = courseReducer(initialState, action);
 
     // assert
-    const updatedCourseB = newState.find(x => x.id === updatedCourse.id);
-    const untouchedCourseA = newState.find(x => x.id === 'A');
-    const untouchedCourseC = newState.find(x => x.id === 'C');
-
-    expect(updatedCourseB.title).toEqual('New Title');
-    expect(untouchedCourseA.title).toEqual('A');
-    expect(untouchedCourseC.title).toEqual('C');
-    expect(newState.length).toEqual(3);
+    expect(actualState).toEqual(expectedState);
   });
 });
