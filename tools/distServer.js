@@ -2,8 +2,12 @@
 import express from 'express';
 import path from 'path';
 import open from 'open';
+import compression from 'compression';
 
 const app = express();
+
+// enables gzip compression
+app.use(compression());
 
 app.use(express.static('dist'));
 
