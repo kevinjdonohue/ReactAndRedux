@@ -479,14 +479,15 @@ In order to gain an understanding of all of the things in play between React and
 
 Here is a typical flow between the items:
 
-| Item        | Conversation                                                                |
-| ------------ ---------------------------------------------------------------------------- |
-| React       | Hey CourseAction, someone clicked this "Save Course" button                 |
-| Action      | Thanks React!  I will dispatch an Action so Reducers that care can update state |
-| Reducer     | Ah, thanks Action.  I see you passed me the current State and the Action to perform.  I'll make a new copy of the state and return it |
-| Store       | Thanks for update the state Reducer.  I'll make sure that all connected components are aware |
-| React-Redux | Thanks for the new data Store.  I'll now intelligently determine if I should tell React about this change so that it only has to bother with updating the UI when necessary |
-| React       | New data has been passed down via props from the Store.  I'll update the UI to reflect this |
+| Item        | Conversation                                                                                                                                                               |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| React       | Hey CourseAction, someone clicked this "Save Course" button                                                                                                                |
+| Action      | Thanks React! I will dispatch an Action so Reducers that care can update state                                                                                             |
+| Reducer     | Ah, thanks Action. I see you passed me the current State and the Action to perform. I'll make a new copy of the state and return it                                        |
+| Store       | Thanks for update the state Reducer. I'll make sure that all connected components are aware                                                                                |
+| React-Redux | Thanks for the new data Store. I'll now intelligently determine if I should tell React about this change so that it only has to bother with updating the UI when necessary |
+| React       | New data has been passed down via props from the Store. I'll update the UI to reflect this                                                                                 |
+
 
 ## Async in Redux
 
@@ -507,9 +508,9 @@ Pros:
 
 Comparison of async handling:
 
-| Flux                  | Redux               |
-| ----------------------  --------------------|
-| Handled in action     | ?                   |
+| Flux              | Redux |
+| ----------------- | ----- |
+| Handled in action | ?     |
 
 ### Async in Redux - Libraries
 
