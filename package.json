@@ -29,7 +29,7 @@
     "express": "^4.16.3",
     "jquery": "^3.3.1",
     "jsdom": "8.5.0",
-    "open": "0.0.5",
+    "open": "6.0.0",
     "popper.js": "^1.14.3",
     "prettier-eslint": "^8.8.1",
     "react": "15.0.2",
