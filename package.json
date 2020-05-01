@@ -15,7 +15,9 @@
     "build:html": "babel-node tools/buildHtml.js",
     "prebuild": "npm-run-all clean-dist test lint build:html",
     "build": "babel-node tools/build.js",
-    "postbuild": "babel-node tools/distServer.js"
+    "postbuild": "babel-node tools/distServer.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Cory House",
   "license": "MIT",
@@ -27,7 +29,7 @@
     "colors": "1.1.2",
     "compression": "^1.7.2",
     "express": "^4.16.3",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jsdom": "8.5.0",
     "open": "0.0.5",
     "popper.js": "^1.14.3",
@@ -44,7 +46,8 @@
     "toastr": "2.1.2",
     "webpack": "1.13.0",
     "webpack-dev-middleware": "1.6.1",
-    "webpack-hot-middleware": "2.10.0"
+    "webpack-hot-middleware": "2.10.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -80,5 +83,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/coryhouse/pluralsight-redux-starter"
-  }
+  },
+  "snyk": true
 }
