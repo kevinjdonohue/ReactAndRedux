@@ -28,7 +28,7 @@
     "compression": "^1.7.2",
     "express": "^4.16.3",
     "jquery": "^3.3.1",
-    "jsdom": "8.5.0",
+    "jsdom": "16.6.0",
     "open": "0.0.5",
     "popper.js": "^1.14.3",
     "prettier-eslint": "^8.8.1",
@@ -42,7 +42,7 @@
     "redux-thunk": "2.0.1",
     "sinon-test": "^2.2.0",
     "toastr": "2.1.2",
-    "webpack": "1.13.0",
+    "webpack": "2.2.0",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0"
   },
