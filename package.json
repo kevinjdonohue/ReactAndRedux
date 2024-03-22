@@ -42,8 +42,8 @@
     "redux-thunk": "2.0.1",
     "sinon-test": "^2.2.0",
     "toastr": "2.1.2",
-    "webpack": "1.13.0",
-    "webpack-dev-middleware": "1.6.1",
+    "webpack": "2.2.0",
+    "webpack-dev-middleware": "5.3.4",
     "webpack-hot-middleware": "2.10.0"
   },
   "devDependencies": {
